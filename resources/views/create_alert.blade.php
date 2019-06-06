@@ -14,16 +14,15 @@
                                 <option disabled selected>Click here to choose..</option>
                                 @foreach($jobList as $job)
                                     <option value="{{ $job->name }}">{{ $job->name }}</option>
-
-
                                 @endforeach
                                 <option value="">Other job?</option>
                             </select>
                         </div>
 
-                        <div id="custom_keyword_section" class="form-group col-md-12"  style="display: none;">
+                        <div id="custom_keyword_section" class="form-group col-md-12" style="display: none;">
                             <label id="custom_keyword_label" for="custom_keyword"><b>Write job name..</b></label>
-                            <input id="custom_keyword" type="text" class="form-control" name="custom_keyword" value="{{ old('custom_keyword') }}">
+                            <input id="custom_keyword" type="text" class="form-control" name="custom_keyword"
+                                   value="{{ old('custom_keyword') }}">
                         </div>
                     </div>
 
@@ -48,15 +47,18 @@
         @else
             <div class="col-md-12 text-center mt-3">
                 <h1 class="text-danger">Success! </h1>
-                <h5>We will start sending you {{ session('keyword') }} jobs in {{ session('location') }} from tomorrow!</h5>
-                <h3> See <a href="{{ route('search.jobs') }}?keyword={{ session('keyword') }}&location={{ session('location') }}">{{ session('keyword') }} jobs in {{ session('location') }}</a></h3>
+                <h5>We will start sending you {{ session('keyword') }} jobs in {{ session('location') }} from
+                    tomorrow!</h5>
+                <h3> See
+                    <a href="{{ route('search.jobs') }}?keyword={{ session('keyword') }}&location={{ session('location') }}">{{ session('keyword') }}
+                        jobs in {{ session('location') }}</a></h3>
             </div>
         @endif
     </div>
 
     <script>
-        $('#keywords').change(function(){
-            if($(this).val() == '') {
+        $('#keywords').change(function () {
+            if ($(this).val() == '') {
                 $('#custom_keyword_section').show();
             } else {
                 $('#custom_keyword_section').hide();

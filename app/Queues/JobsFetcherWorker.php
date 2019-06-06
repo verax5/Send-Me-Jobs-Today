@@ -1,15 +1,18 @@
 <?php namespace App\Queues;
 
 use App\User;
+use App\Setting;
 use GuzzleHttp\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
-class JobsByEmailFetcherWorker implements ShouldQueue {
+class JobsFetcherWorker implements ShouldQueue
+{
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $api = 'https://adview.online/api/v1/jobs.json';
@@ -18,14 +21,16 @@ class JobsByEmailFetcherWorker implements ShouldQueue {
 
     private $guzzle;
 
-    public function __construct($user) {
+    public function __construct($user)
+    {
         $this->user = $user;
     }
 
-    public function handle(Client $guzzle) {
-        $this->guzzle = $guzzle;
+    public function handle(Client $guzzle)
+    {
+        $this->cacheSettings();
 
-        echo $this->user->id;
+        $this->guzzle = $guzzle;
         $user = User::find($this->user->id);
 
         try {
@@ -34,7 +39,7 @@ class JobsByEmailFetcherWorker implements ShouldQueue {
 
             if ($jobs) {
                 $this->storeJobs($jobs);
-            } else {
+            } elseif (Cache::get('dropLocation') == 1) {
                 $retry = true;
                 $jobs = $this->fetch($this->user, $retry);
                 $this->storeJobs($jobs);
@@ -51,22 +56,26 @@ class JobsByEmailFetcherWorker implements ShouldQueue {
         }
     }
 
-    private function fetch($user, $retry) {
+    private function fetch($user, $retry)
+    {
         $location = $user->location;
-        $keyword = $user->keyword;
+        $limit = 25;
 
         if ($retry) {
             $location = '';
-            $keyword = '';
+        }
+
+        if (Cache::get('singleFetch') == 1) {
+            $limit = 1;
         }
 
         $request = $this->guzzle->request('GET', $this->api, [
                 'query' => [
                     'publisher' => $this->publisher,
-                    'keyword' => $keyword,
+                    'keyword' => $user->keyword,
                     'location' => $location,
                     'unique_id' => $user->email,
-                    'limit' => 25,
+                    'limit' => $limit,
                     'radius' => 10,
                 ]
             ]
@@ -75,8 +84,9 @@ class JobsByEmailFetcherWorker implements ShouldQueue {
         return json_decode($request->getBody()->getContents())->data;
     }
 
-    private function storeJobs($jobs) {
-        foreach($jobs as $job) {
+    private function storeJobs($jobs)
+    {
+        foreach ($jobs as $job) {
             $user = User::find($this->user->id);
 
             $job = [
@@ -94,6 +104,22 @@ class JobsByEmailFetcherWorker implements ShouldQueue {
             ];
 
             $user->jobs()->create($job);
+        }
+    }
+
+    // Caches for 10 mins. New values will be used after that.
+    private function cacheSettings()
+    {
+        $settings = Setting::all();
+
+        if (!Cache::get('dropLocation')) {
+            $setting = (int)$settings->where('name', 'drop_location')->first()->value;
+            Cache::put('dropLocation', $setting, 10);
+        }
+
+        if (!Cache::get('singleFetch')) {
+            $setting = (int)$settings->where('name', 'single_fetch')->first()->value;
+            Cache::put('singleFetch', $setting, 10);
         }
     }
 }

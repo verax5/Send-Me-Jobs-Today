@@ -5,20 +5,25 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class JobsMailable extends Mailable {
+class JobsMailable extends Mailable
+{
     use Queueable, SerializesModels;
 
     public $fromAddress = 'jobs@sendmejobstoday.com';
     public $user;
     public $jobs;
+    public $singleFetch;
 
-    public function __construct($user, $jobs) {
+    public function __construct($user, $jobs, $singleFetch)
+    {
         $this->user = $user;
         $this->jobs = $jobs;
+        $this->singleFetch = $singleFetch;
     }
 
-    public function build() {
-        $this->withSwiftMessage(function($message) {
+    public function build()
+    {
+        $this->withSwiftMessage(function ($message) {
             $message->getHeaders()->addTextHeader('List-Unsubscribe', route('unsubscribe') . '?email=' . $this->user->email);
         });
 
