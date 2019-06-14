@@ -28,6 +28,7 @@ class JobsMailable extends Mailable
         });
 
         return $this->view('mail.jobs_mail')
+            ->text('mail.jobs_mail_text_version')
             ->from($this->fromAddress, 'Send me Jobs Today')
             ->subject('Todays new jobs');
     }

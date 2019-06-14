@@ -1,9 +1,12 @@
-<div class="container" style="width:600px; margin:auto;">
+<html>
+<body>
+<div style="width:600px; margin:auto;">
     <img width="1" height="1" border="0" style="border: none; padding: 0;"
-         src="https://adview.online/api/v1/pub-tracking/jbe/1145/space.gif">
+         alt="tracking" src="https://adview.online/api/v1/pub-tracking/jbe/1145/space.gif">
 
     <div style="text-align:center; margin-bottom:20px;">
         <a href="{{ route('home') }}?keyword={{ $user->keyword }}&location={{ $user->location }}"><img
+                    alt="send me jobs today"
                     style="width:300px;margin:auto;" src="{{ asset('logo.png')  }}"/>
         </a>
     </div>
@@ -18,7 +21,7 @@
         </div>
     </div>
 
-    <div class="jobs" style="margin:auto;">
+    <div style="margin:auto;">
         <p style="text-align: right; font-size:14px;">
             Jobs not relevant? <a style="text-align: right;"
                                   href="{{ route('direct.login.view') }}?token={{ $user->direct_login_token }}">Improve</a>
@@ -57,3 +60,6 @@
         @endif
     </div>
 </div>
+</body>
+</html>
+
