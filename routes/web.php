@@ -24,6 +24,7 @@ Route::post('contact', 'ContactController@send')->name('contact');
 Route::get('jobs-in-email-preview', 'MailTemplatesPreviewController@jobsInEmail');
 Route::get('confirmation-preview', 'MailTemplatesPreviewController@confirmation');
 Route::get('contact-preview', 'MailTemplatesPreviewController@contact');
+Route::get('send-test-email', 'MailTemplatesPreviewController@sendTestEmail');
 
 
 Route::get('redirect', 'RedirectUserController@redirect')->name('redirect');

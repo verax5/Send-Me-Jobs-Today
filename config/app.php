@@ -2,6 +2,7 @@
 
 return [
 
+    'test_key' => env('TEST_KEY'),
     'mailgun_webhook_key' => env('MAILGUN_WEBHOOK_KEY'),
 
     /*
