@@ -17,6 +17,6 @@ class RedirectUserController extends Controller {
 
         $redirectTo = 'https://adview.online' . urldecode(request()->input('url'));
 
-        return response()->redirectTo($redirectTo);
+        return view('redirect_page', ['redirectTo' => $redirectTo]);
     }
 }
