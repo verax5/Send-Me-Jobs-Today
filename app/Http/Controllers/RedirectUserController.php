@@ -15,7 +15,7 @@ class RedirectUserController extends Controller {
         $this->clicksClass->setUserId(request()->input('user_id'));
         $this->clicksClass->track();
 
-        $redirectTo = urldecode(request()->input('url'));
+        $redirectTo = 'https://adview.online' . urldecode(request()->input('url'));
 
         return response()->redirectTo($redirectTo);
     }

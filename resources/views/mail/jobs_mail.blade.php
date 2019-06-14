@@ -31,7 +31,7 @@
         @if (!$singleFetch)
             @foreach($jobs as $job)
                 <a style="font-size:15px; background-color: #e4ebff; display: inline-block; width: 100%; padding: 10px;"
-                   href="{{ route('redirect') }}?user_id={{ $user->id }}&url={{ urlencode($job->url) }}"> {{ str_limit($job->title, 100) }}</a>
+                   href="{{ route('redirect') }}?user_id={{ $user->id }}&url={{ urlencode(str_replace('https://adview.online', '', $job->url)) }}"> {{ str_limit($job->title, 100) }}</a>
                 <p style="font-size:14px">{!! str_replace('...' , '', ucwords(strtolower($job->snippet))) !!}</p>
                 <ul style="font-size:14px">
                     @if($job->age)

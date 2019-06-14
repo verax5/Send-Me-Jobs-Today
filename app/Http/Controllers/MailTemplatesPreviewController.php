@@ -40,13 +40,11 @@ class MailTemplatesPreviewController extends Controller
         $user->location = 'london';
         $user->name = 'sami';
 
-        return view('mail.jobs_mail', ['user' => $user, 'jobs' => $jobs]);
+        return view('mail.jobs_mail', ['user' => $this->user, 'jobs' => $jobs, 'singleFetch' => '']);
     }
 
     public function confirmation()
     {
-
-
         return view('mail.email_confirmation', ['user' => $this->user]);
     }
 
