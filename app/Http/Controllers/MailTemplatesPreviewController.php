@@ -61,13 +61,15 @@ class MailTemplatesPreviewController extends Controller
             return 'wrong email';
         }
 
-        $keyword = 'sales';
-        $location = 'london';
+        $keyword    = 'sales';
+        $location   = 'london';
+        $limit      = 10;
 
         $query = http_build_query([
             'publisher'     => 1145,
             'keyword'       => $keyword,
             'location'      => $location,
+            'limit'         => $limit,
         ]);
 
         $url = 'https://adview.online/api/v1/jobs.json?' . $query;

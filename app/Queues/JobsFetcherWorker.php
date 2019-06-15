@@ -59,7 +59,7 @@ class JobsFetcherWorker implements ShouldQueue
     private function fetch($user, $retry)
     {
         $location = $user->location;
-        $limit = 25;
+        $limit = 10;
 
         if ($retry) {
             $location = '';
