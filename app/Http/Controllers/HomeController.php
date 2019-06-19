@@ -46,15 +46,15 @@ class HomeController extends Controller {
 
         try {
             $this->searchJobs->getJobDetails();
-            $job = $this->searchJobs->search();
+            $jobs = $this->searchJobs->search();
         } catch (\Exception $e) {
             Log::info($e);
         }
 
-        parse_str($job->data[0]->url, $query);
+        parse_str($jobs->data[0]->url, $query);
         $medium = $query['utm_medium'];
 
-        return view('job_details', ['job' => $job->data[0], 'nextPage' => $this->nextPage, 'previousPage' => $this->previousPage, 'medium' => $medium]);
+        return view('job_details', ['jobs' => $jobs->data, 'nextPage' => $this->nextPage, 'previousPage' => $this->previousPage, 'medium' => $medium]);
     }
 
 }

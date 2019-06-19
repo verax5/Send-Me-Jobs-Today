@@ -50,7 +50,7 @@ class SearchJobs
         {
             $this->mode = 'advanced';
             $this->keyword = '@(title)' . str_replace(['/', '–', '-'], ' ', request()->get('keyword'));
-            $this->location = request()->get('location');
+            $this->location = explode(',', request()->get('location'))[0];
 
             if (request()->input('search_type') == 'email')
             {
@@ -77,7 +77,7 @@ class SearchJobs
             'user_ip' => $userIp,
             'salary_from' => 1,
             'limit' => 25,
-            'radius' => 10,
+            'radius' => 25,
             'mode' => $this->mode,
             'unique_id' => $uniqueId,
         ];
