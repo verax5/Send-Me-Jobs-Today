@@ -50,7 +50,7 @@
             @endforeach
         @else
             <h1 style="text-align: center;">We have found a <span
-                        style="color:darkorange; font-style: italic;">{{ ucfirst($user->keyword)  }}</span> job for you!
+                        style="color:darkorange; font-style: italic;">{{ ucfirst(stripslashes($user->keyword))  }}</span> job for you!
             </h1>
             <h1 style="text-align:center">
                 <hr>
