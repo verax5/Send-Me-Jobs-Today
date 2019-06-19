@@ -25,7 +25,10 @@
             @if($jobs)
                 @foreach($jobs->data as $job)
                     <div class="job-box">
-                        <p class="url"> <a target="_blank" class="job_titles" href="{{ $job->url }}" onmousedown="{{ $job->onmousedown }}">{{ $job->title }}</a> (<a href="{{ route('job.details') }}?keyword={{ $job->title }}&location={{ $job->location }}">Details</a>)</p>
+                        <p class="url">
+                            <a target="_blank" class="job_titles" href="{{ $job->url }}" onmousedown="{{ $job->onmousedown }}">{{ $job->title }}</a>
+                            (<a href="{{ route('job.details') }}?keyword={{ urlencode($job->title) }}&location={{ $job->location }}">Details</a>)
+                        </p>
                         <p class="salary"><i class="fas fa-coins"></i> {{ str_limit($job->salary, 50) }}
                         <i class="fas fa-map-marker-alt"></i> {{ $job->location }} </p>
 

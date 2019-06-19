@@ -2,7 +2,8 @@
 
 use GuzzleHttp\Client;
 
-class SearchJobs {
+class SearchJobs
+{
     private $guzzle;
     private $keyword;
     private $location;
@@ -16,7 +17,8 @@ class SearchJobs {
     private $previousPage;
     private $jobDetailsSearch = false;
 
-    public function __construct(Client $guzzle) {
+    public function __construct(Client $guzzle)
+    {
         $this->guzzle = $guzzle;
 
         $this->keyword = request()->input('keyword') == false ? 'warehouse' : request()->input('keyword');
@@ -27,7 +29,8 @@ class SearchJobs {
         $this->setCurrentPage(request()->input('page'));
     }
 
-    public function setCurrentPage($page) {
+    public function setCurrentPage($page)
+    {
         $this->currentPage = $page;
 
         if ($this->currentPage == '') {
@@ -35,22 +38,22 @@ class SearchJobs {
         }
 
         $this->nextPage = $this->currentPage + 1;
-        $this->previousPage = ($this->currentPage - 1) <= 0 ? 1 : $this->currentPage - 1 ;
+        $this->previousPage = ($this->currentPage - 1) <= 0 ? 1 : $this->currentPage - 1;
     }
 
-    public function search() {
-
-        if($this->jobDetailsSearch) {
+    public function search()
+    {
+        if ($this->jobDetailsSearch) {
             $this->mode = 'advanced';
-            $this->keyword = '@(title)' . str_replace('-', '', request()->get('keyword'));
-            $this->location  = explode( ' ', request()->get('location'))[0];
+            $this->keyword = '@(title)' . str_replace(['/', '–', '-'], ' ', request()->get('keyword'));
+            $this->location = request()->get('location');
         }
 
         if (app()->environment() == 'local') {
             $userIp = request()->getClientIp();
         }
 
-        if(app()->environment() == 'live') {
+        if (app()->environment() == 'live') {
             $userIp = $_SERVER['HTTP_CF_CONNECTING_IP'];
         }
 
@@ -76,15 +79,18 @@ class SearchJobs {
         return json_decode($request->getBody()->getContents());
     }
 
-    public function getJobDetails() {
+    public function getJobDetails()
+    {
         $this->jobDetailsSearch = true;
     }
 
-    public function getNextPage() {
+    public function getNextPage()
+    {
         return $this->nextPage;
     }
 
-    public function getPreviousPage() {
+    public function getPreviousPage()
+    {
         return $this->previousPage;
     }
 }

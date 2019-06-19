@@ -54,7 +54,7 @@
             </h1>
             <h1 style="text-align:center">
                 <hr>
-                <p style="font-size:20px; margin-top:30px;">Would you be interested?</p>
+                <p style="font-size:20px; margin-top:30px;">Are you interested?</p>
                 <a href="{{ route('job.details') }}?keyword={{ $user->keyword }}">View Details..</a>
             </h1>
         @endif

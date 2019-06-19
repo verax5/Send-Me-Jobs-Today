@@ -51,6 +51,10 @@ class HomeController extends Controller {
             Log::info($e);
         }
 
+        if (! isset($job->data[0])) {
+            dd('no results');
+        }
+
         return view('job_details', ['job' => $job->data[0], 'nextPage' => $this->nextPage, 'previousPage' => $this->previousPage]);
     }
 
