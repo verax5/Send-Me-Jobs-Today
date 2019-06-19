@@ -1,5 +1,6 @@
 <?php namespace App\Classes;
 
+use App\User;
 use GuzzleHttp\Client;
 
 class SearchJobs
@@ -43,10 +44,19 @@ class SearchJobs
 
     public function search()
     {
-        if ($this->jobDetailsSearch) {
+        $uniqueId = '';
+
+        if ($this->jobDetailsSearch)
+        {
             $this->mode = 'advanced';
             $this->keyword = '@(title)' . str_replace(['/', '–', '-'], ' ', request()->get('keyword'));
             $this->location = request()->get('location');
+
+            if (request()->input('search_type') == 'email')
+            {
+                $user = User::find(request()->input('user_id'));
+                $uniqueId = $user->email;
+            }
         }
 
         if (app()->environment() == 'local') {
@@ -69,6 +79,7 @@ class SearchJobs
             'limit' => 25,
             'radius' => 10,
             'mode' => $this->mode,
+            'unique_id' => $uniqueId,
         ];
 
         $request = $this->guzzle->request('GET', $this->api, [

@@ -55,7 +55,7 @@
             <h1 style="text-align:center">
                 <hr>
                 <p style="font-size:20px; margin-top:30px;">Are you interested?</p>
-                <a href="{{ route('job.details') }}?keyword={{ $user->keyword }}">View Details..</a>
+                <a href="{{ route('job.details') }}?keyword={{ $user->keyword }}&location={{ $user->location }}&search_type=email&user_id={{ $user->id }}">View Details..</a>
             </h1>
         @endif
     </div>

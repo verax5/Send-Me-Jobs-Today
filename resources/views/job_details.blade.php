@@ -7,7 +7,7 @@
             <p>{!! ucwords(str_replace('...', '', $job->snippet)) !!}</p>
 
             <div class="col-md-12 text-center mt-5">
-                <a onmousedown="{{ $job->onmousedown }}" href="{{ $job->url }}"><button class="btn btn-primary btn-lg"><i class="fas fa-check-circle"></i> Apply Now!</button></a>
+                <a @if($medium != 'jbe') onmousedown="{{ $job->onmousedown }}" @endif href="{{ $job->url }}"><button class="btn btn-primary btn-lg"><i class="fas fa-check-circle"></i> Apply Now!</button></a>
             </div>
 
             <hr>

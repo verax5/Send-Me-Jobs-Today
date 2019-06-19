@@ -51,11 +51,10 @@ class HomeController extends Controller {
             Log::info($e);
         }
 
-        if (! isset($job->data[0])) {
-            dd('no results');
-        }
+        parse_str($job->data[0]->url, $query);
+        $medium = $query['utm_medium'];
 
-        return view('job_details', ['job' => $job->data[0], 'nextPage' => $this->nextPage, 'previousPage' => $this->previousPage]);
+        return view('job_details', ['job' => $job->data[0], 'nextPage' => $this->nextPage, 'previousPage' => $this->previousPage, 'medium' => $medium]);
     }
 
 }
