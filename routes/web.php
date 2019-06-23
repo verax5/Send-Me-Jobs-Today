@@ -49,3 +49,14 @@ Route::post('set-password', 'UserLoginController@normalPasswordSet')->name('norm
 
 Route::get('password-set-by-email', 'UserLoginController@normalPasswordSetAskEmailView')->name('normal.password.set.ask.email');
 Route::post('password-set-by-email', 'UserLoginController@normalPasswordSetAskEmailSubmit')->name('normal.password.set.ask.email');
+
+
+
+
+Route::get('create-company', 'CompanyController@createView')->name('create.company');
+Route::post('create-company', 'CompanyController@create')->name('create.company');
+
+Route::get('expand-company/{company_id}', 'CompanyController@expandCompany')->name('expand.company');
+
+Route::post('download-feed/{company_id}', 'CompanyController@downloadFeed')->name('download.feed');
+
