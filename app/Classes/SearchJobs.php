@@ -75,9 +75,9 @@ class SearchJobs
             'categories' => $this->category,
             'user_agent' => request()->server('HTTP_USER_AGENT'),
             'user_ip' => $userIp,
-            'salary_from' => 1,
-            'limit' => 25,
-            'radius' => 25,
+            // Give me any job even without salary 'salary_from' => 1,
+            'limit' => 50,
+            'radius' => 20,
             'mode' => $this->mode,
             'unique_id' => $uniqueId,
         ];

@@ -5,8 +5,6 @@
 @section('content')
     <div class="row">
         <div class="col-md-9">
-            <div class="message_top">No time for search? <a href="{{ route('create.alert') }}">Receive automatic alerts everyday.</a></div>
-
             <form class="form-inline search-box" method="GET" action="{{ route('search.jobs') }}">
                 <div class="form-group">
                     <label for="keyword"> <b> Job? </b> </label>
@@ -22,6 +20,11 @@
                 <button class="btn btn-primary" type="submit"> Search </button>
             </form>
 
+            @if(request()->get('event') == 'sorter')
+                <p><img width="500px" src="{{ asset('christmas_sorter.jpg') }}"></p>
+            @endif
+            
+
             @if($jobs)
                 @foreach($jobs->data as $job)
                     @php
@@ -32,7 +35,6 @@
                     <div class="job-box">
                         <p class="url">
                             <a target="_blank" class="job_titles" href="{{ $job->url }}" onmousedown="{{ $job->onmousedown }}">{{ $job->title }}</a>
-                            (<a href="{{ route('job.details') }}?keyword={{ urlencode($job->title) }}&location={{ $location }}">Details</a>)
                         </p>
                         <p class="salary"><i class="fas fa-coins"></i> {{ str_limit($job->salary, 50) }}
                         <i class="fas fa-map-marker-alt"></i> {{ $job->location }} </p>

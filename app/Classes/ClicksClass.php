@@ -14,4 +14,8 @@ class ClicksClass {
     public function setUserId($userId) {
         $this->userId = $userId;
     }
+
+    public function trackOpens() {
+        Click::updateOrCreate(['user_id' => $this->userId, 'date' => today()], ['opens' => \DB::raw('opens+1')]);
+    }
 }

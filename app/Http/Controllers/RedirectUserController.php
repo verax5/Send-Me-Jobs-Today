@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Classes\ClicksClass;
+use App\Click;
 
 class RedirectUserController extends Controller {
 
@@ -19,4 +20,10 @@ class RedirectUserController extends Controller {
 
         return view('redirect_page', ['redirectTo' => $redirectTo]);
     }
+
+    public function trackOpens($userId) {
+        $this->clicksClass->setUserId($userId);
+        $this->clicksClass->trackOpens();
+    }
+
 }
