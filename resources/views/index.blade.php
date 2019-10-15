@@ -23,6 +23,10 @@
             @if(request()->get('event') == 'sorter')
                 <p><img width="500px" src="{{ asset('christmas_sorter.jpg') }}"></p>
             @endif
+
+
+            <br>
+            <p class="text-center"><img width="700px" src="{{ asset('bricklayer_jobs.jpg') }}"></p>
             
 
             @if($jobs)

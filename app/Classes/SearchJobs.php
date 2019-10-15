@@ -22,7 +22,7 @@ class SearchJobs
     {
         $this->guzzle = $guzzle;
 
-        $this->keyword = request()->input('keyword') == false ? 'warehouse' : request()->input('keyword');
+        $this->keyword = request()->input('keyword') == false ? 'bricklayer' : request()->input('keyword');
         $this->location = request()->input('location') == false ? 'london' : request()->input('location');
 
         $this->category = request()->input('category');
