@@ -23,10 +23,6 @@
             @if(request()->get('event') == 'sorter')
                 <p><img width="500px" src="{{ asset('christmas_sorter.jpg') }}"></p>
             @endif
-
-
-            <br>
-            <p class="text-center"><img width="700px" src="{{ asset('bricklayer_jobs.jpg') }}"></p>
             
 
             @if($jobs)
@@ -41,7 +37,6 @@
                             <a target="_blank" class="job_titles" href="{{ $job->url }}" onmousedown="{{ $job->onmousedown }}">{{ $job->title }}</a>
                         </p>
                         <p class="salary"><i class="fas fa-coins"></i> {{ str_limit($job->salary, 50) }}
-                        <i class="fas fa-map-marker-alt"></i> {{ $job->location }} </p>
 
                         <p class="snippet d-none d-sm-block">{!! str_replace('...', '', str_limit($job->snippet, 200)) !!}..</p>
                     </div>
