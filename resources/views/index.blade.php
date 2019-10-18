@@ -20,9 +20,10 @@
                 <button class="btn btn-primary" type="submit"> Search </button>
             </form>
 
-            @if(request()->get('event') == 'sorter')
-                <p><img width="500px" src="{{ asset('christmas_sorter.jpg') }}"></p>
-            @endif
+            <br>
+            <p class="text-muted"><b>MyConstructionJob is an easy to use job searching website where we specifically focus on providing you with the most up to date construction jobs. The jobs posted on our sites come from many different sources so you can expect to see various jobs in one place. This saves the time and it's super easy to use if you're looking for a new job.</b></p>
+
+            <hr>
             
 
             @if($jobs)
@@ -36,7 +37,10 @@
                         <p class="url">
                             <a target="_blank" class="job_titles" href="{{ $job->url }}" onmousedown="{{ $job->onmousedown }}">{{ $job->title }}</a>
                         </p>
-                        <p class="salary"><i class="fas fa-coins"></i> {{ str_limit($job->salary, 50) }}
+
+                        @if($job->salary)
+                            <p class="salary"><i class="fas fa-coins"></i> {{ str_limit($job->salary, 50) }}
+                        @endif
 
                         <p class="snippet d-none d-sm-block">{!! str_replace('...', '', str_limit($job->snippet, 200)) !!}..</p>
                     </div>
