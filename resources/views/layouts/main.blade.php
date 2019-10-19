@@ -29,9 +29,13 @@
 
     <body>
         <div class="container">
-            <div class="logo d-none d-sm-block">
-                <a href="/"><img class="img-fluid" src="{{ asset('logo.png') }}"></a>
-            </div>
+
+            @if(request()->get('logo') != 1)
+                <div class="logo d-none d-sm-block">
+                    <a href="/"><img class="img-fluid" src="{{ asset('logo.png') }}"></a>
+                </div>
+            @endif
+
             @include('navbar')
 
             @include('messages')
