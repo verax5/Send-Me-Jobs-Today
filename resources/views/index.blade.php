@@ -20,11 +20,6 @@
                 <button class="btn btn-primary" type="submit"> Search </button>
             </form>
 
-            <br>
-            <p class="text-muted"><b>MyConstructionJob is an easy to use job searching website where we specifically focus on providing you with the most up to date construction jobs. The jobs posted on our sites come from many different sources so you can expect to see various jobs in one place. This saves the time and it's super easy to use if you're looking for a new job. Note we also have non construction jobs. Feel free to browse.</b></p>
-
-            <hr>
-
             @if(request()->get('title'))
                 <h2><b>{{ ucfirst(request()->get('title')) }}</b></h1>
             @endif
