@@ -37,11 +37,11 @@
                             <a target="_blank" class="job_titles" href="{{ $job->url }}" onmousedown="{{ $job->onmousedown }}">{{ $job->title }}</a>
                         </p>
 
-                        @if($job->salary)
+<!--                         @if($job->salary)
                             <p class="salary"><i class="fas fa-coins"></i> {{ str_limit($job->salary, 50) }}
                         @endif
 
-                        <p class="snippet d-none d-sm-block">{!! str_replace('...', '', str_limit($job->snippet, 200)) !!}..</p>
+                        <p class="snippet d-none d-sm-block">{!! str_replace('...', '', str_limit($job->snippet, 200)) !!}..</p> -->
                     </div>
                 @endforeach
             @else
