@@ -2,6 +2,7 @@
 
 use App\Classes\SearchJobs;
 use Illuminate\Support\Facades\Log;
+use DB;
 
 class HomeController extends Controller {
     private $searchJobs;
@@ -55,6 +56,15 @@ class HomeController extends Controller {
         $medium = $query['utm_medium'];
 
         return view('job_details', ['jobs' => $jobs->data, 'nextPage' => $this->nextPage, 'previousPage' => $this->previousPage, 'medium' => $medium]);
+    }
+
+    public function countClick()
+    {
+        if(DB::table('track')->where('date', now()->toDateString())->first()) {
+            DB::table('track')->where('date', now()->toDateString())->increment('count');
+        } else {
+            DB::table('track')->insert(['date' => now()->toDateString(), 'count' => 1]);
+        }
     }
 
 }

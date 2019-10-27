@@ -34,7 +34,7 @@
 
                     <div class="job-box">
                         <p class="url">
-                            <a target="_blank" class="job_titles" href="{{ $job->url }}" onmousedown="{{ $job->onmousedown }}">{{ $job->title }}</a>
+                            <a onclick="countClick();" target="_blank" class="job_titles" href="{{ $job->url }}" onmousedown="{{ $job->onmousedown }}">{{ $job->title }}</a>
                         </p>
 
 <!--                         @if($job->salary)
@@ -75,4 +75,14 @@
             </div>
         </div>
     </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+    <script>
+            function countClick() { 
+                jQuery.get('/count-click');      
+            }
+    </script>
 @endsection
