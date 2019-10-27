@@ -34,14 +34,18 @@
 
                     <div class="job-box">
                         <p class="url">
-                            <a onclick="countClick();" target="_blank" class="job_titles" href="{{ $job->url }}" onmousedown="{{ $job->onmousedown }}">{{ $job->title }}</a>
+                            <a style="font-size:20px;" onclick="countClick();" target="_blank" class="job_titles" href="{{ $job->url }}" onmousedown="{{ $job->onmousedown }}">{{ $job->title }}</a>
+
+                            @if($job->salary)
+                                <span style="font-style: italic; font-size:15px;" class="salary"><i class="fas fa-coins"></i><i>{{ str_limit($job->salary, 100) }}</i></span> 
+                            @endif
                         </p>
 
-<!--                         @if($job->salary)
-                            <p class="salary"><i class="fas fa-coins"></i> {{ str_limit($job->salary, 50) }}
-                        @endif
+                        <span>{{ $job->location }} </span>
 
-                        <p class="snippet d-none d-sm-block">{!! str_replace('...', '', str_limit($job->snippet, 200)) !!}..</p> -->
+                        <p class="snippet d-sm-block">{!! str_replace('...', '', str_limit($job->snippet, 500)) !!}..</p>
+
+                        <a onclick="countClick();" target="_blank" class="job_titles" href="{{ $job->url }}" onmousedown="{{ $job->onmousedown }}">More Info..</a>
                     </div>
                 @endforeach
             @else
