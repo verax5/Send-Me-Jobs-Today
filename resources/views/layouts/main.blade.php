@@ -6,14 +6,14 @@
         <link rel="stylesheet" type="text/css" href="/css/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110222642-3"></script>
+        <!-- Global site tag (gtag.js) - Google Ads: 946383617 -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-946383617"></script>
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', 'UA-110222642-3');
+          gtag('config', 'AW-946383617');
         </script>
 
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
