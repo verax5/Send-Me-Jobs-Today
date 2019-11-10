@@ -16,6 +16,7 @@ class CreateBlogTable extends Migration
             $table->string('preview_text');
             $table->string('blogpost_keyword')->nullable();
             $table->string('related_jobs_keyword')->nullable();
+            $table->string('header_image');
             $table->string('location')->nullable();
             $table->timestamps();
         });

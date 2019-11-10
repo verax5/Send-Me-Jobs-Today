@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-7">
             <br> <h5>{{ $blogpost->title }}</h5> <br>
-            <p class="text-center"><img width="200px" src="https://primark.a.bigcontent.io/v1/static/logo-primark-for-website"></p>
+            <p class="text-center"><img width="200px" src="{{$blogpost->header_image}}"></p>
             <p><a href="{{ route('search.jobs') }}?keyword={{$blogpost->blogpost_keyword}}"><button class="btn btn-info">View {{ $blogpost->blogpost_keyword }} Jobs</button></a></p>
             {!! $blogpost->blogpost !!}
         </div>
