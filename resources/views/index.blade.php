@@ -24,7 +24,6 @@
                 <h2><b>{{ ucfirst(request()->get('title')) }}</b></h1>
             @endif
             
-
             @if($jobs)
                 @foreach($jobs->data as $job)
                     @php

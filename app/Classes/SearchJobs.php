@@ -18,6 +18,9 @@ class SearchJobs
     private $previousPage;
     private $jobDetailsSearch = false;
 
+    public $blogpostKeyword;
+    public $blogpostLocation;
+
     public function __construct(Client $guzzle)
     {
         $this->guzzle = $guzzle;
@@ -42,21 +45,16 @@ class SearchJobs
         $this->previousPage = ($this->currentPage - 1) <= 0 ? 1 : $this->currentPage - 1;
     }
 
-    public function search()
+    public function search($page = null)
     {
         $uniqueId = '';
 
-        if ($this->jobDetailsSearch)
-        {
-            $this->mode = 'advanced';
-            $this->keyword = '@(title)' . str_replace(['/', '–', '-'], ' ', request()->get('keyword'));
-            $this->location = explode(',', request()->get('location'))[0];
-
-            if (request()->input('search_type') == 'email')
-            {
-                $user = User::find(request()->input('user_id'));
-                $uniqueId = $user->email;
-            }
+        if($page == 'blog') {
+            $this->keyword = $this->blogpostKeyword;
+            $this->location = $this->blogpostLocation;
+        } else {
+            $this->keyword = str_replace(['/', '–', '-'], ' ', request()->get('keyword'));
+            $this->location = request()->get('location');
         }
 
         if (app()->environment() == 'local') {
@@ -78,8 +76,6 @@ class SearchJobs
             // Give me any job even without salary 'salary_from' => 1,
             'limit' => 50,
             'radius' => 20,
-            'mode' => $this->mode,
-            'unique_id' => $uniqueId,
         ];
 
         $request = $this->guzzle->request('GET', $this->api, [

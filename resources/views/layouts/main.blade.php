@@ -30,7 +30,7 @@
 
             @if(request()->get('logo') != 1)
                 <div class="logo d-none d-sm-block">
-                    <a href="/"><img class="img-fluid" src="{{ asset('logo.png') }}"></a>
+                    <a href="/"><img class="img-fluid" src="{{ asset('joblookupbasket.png') }}"></a>
                 </div>
             @endif
 

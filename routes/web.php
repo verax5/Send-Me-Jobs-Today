@@ -6,6 +6,9 @@ Route::get('search', 'HomeController@searchJobs')->name('search.jobs');
 
 Route::get('count-click', 'HomeController@countClick');
 
+Route::get('blog', 'BlogController@index')->name('blogIndex');
+Route::get('blogpost/{blogpost}', 'BlogController@blogpost')->name('blogpost');
+
 // Route::get('job-details', 'HomeController@jobDetails')->name('job.details');
 
 //Route::get('create-alert', 'CreateJobAlertController@index')->name('create.alert');
