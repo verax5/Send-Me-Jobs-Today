@@ -43,17 +43,7 @@ class HomeController extends Controller {
     }
 
     public function jobDetails() {
-        $jobs = false;
-
-        try {
-            $this->searchJobs->getJobDetails();
-            $jobs = $this->searchJobs->search();
-        } catch (\Exception $e) {
-            Log::info($e);
-        }
-
-        parse_str($jobs->data[0]->url, $query);
-        $medium = $query['utm_medium'];
+        
 
         return view('job_details', ['jobs' => $jobs->data, 'nextPage' => $this->nextPage, 'previousPage' => $this->previousPage, 'medium' => $medium]);
     }
@@ -65,6 +55,11 @@ class HomeController extends Controller {
         } else {
             DB::table('track')->insert(['date' => now()->toDateString(), 'count' => 1]);
         }
+    }
+
+    public function getJobDetails()
+    {
+        return view('job_details', ['jobDetails' => $this->searchJobs->search(null, 1)->data[0]]);
     }
 
 }

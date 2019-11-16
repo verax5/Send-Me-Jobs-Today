@@ -1,65 +1,27 @@
 @extends('layouts.main')
 
+@section('title', 'Apply now')
+
 @section('content')
+
     <div class="row">
-        <div class="col-md-12 mt-3">
-            <h5 class="job_details_title"> {{ $jobs[0]->title }} </h5>
-            <p>{!! ucwords(str_replace('...', '', $jobs[0]->snippet)) !!}</p>
+    	<div class="col-md-12">
+    		<h2>{{request()->get('title')}}</h2> Location: {{request()->location}} <br> <br
+    		<p>As a {{request()->title}} you will be working on various projects which includes working on greenfield projects aswell as legacy. You're also expected to have good understanding of MySQL aswell as HTML/CSS and Javascript along with good communication skills.</p>
 
-            <h6 style="font-weight:bold;">Additional info</h6>
+    		<p>{!! $jobDetails->snippet !!}</p>
+    		
+    		<div class="text-center">
+       			<a onclick="countClick();" target="_blank" class="job_titles" href="{{ $jobDetails->url }}" onmousedown="{{ $jobDetails->onmousedown }}"><button style="padding-left:50px; padding-right:50px; background-color:#dd5800; font-size:20px; text-decoration: underline;" class="btn btn-info">Apply</button></a>
+       		</div>
+    	</div>
 
-            <ul class="text-left">
-                <div class="additional_info">
-                    @if($jobs[0]->location) <li> <i class="fas fa-map-marker"></i> {{ $jobs[0]->location }}</li> @endif
-                    @if($jobs[0]->salary) <li> <i class="fas fa-coins"></i> {{ $jobs[0]->salary }}</li> @endif
-                    @if($jobs[0]->job_type) <li> {{ $jobs[0]->job_type }}</li> @endif
-                    @if($jobs[0]->company) <li> <i class="fas fa-building"></i> {{ $jobs[0]->company }}</li> @endif
-                    @if($jobs[0]->age) <li> <i class="fas fa-clock"></i> {{ $jobs[0]->age }}</li> @endif
-                </div>
-            </ul>
-
-            <div class="col-md-12 text-center mt-3">
-                <a @if($medium != 'jbe') onmousedown="{{ $jobs[0]->onmousedown }}" @endif href="{{ $jobs[0]->url }}"><button class="btn btn-primary"><i class="fas fa-check-circle"></i> Apply Now!</button></a>
-            </div>
-
-            <ul class="list-group-flush">
-                <b>Similar jobs</b>
-                @foreach($jobs as $job)
-                    @php $location = explode(',', $job->location); $location = end($location); @endphp
-                    <li class="list-group-item text-left">
-                        <a @if(request()->get('search_type') != 'email') onmousedown="{{ $job->onmousedown }}" @endif href="{{ $job->url }}">{{ $job->title }}</a>
-                        <span style="float:right">{{ $location }}</span>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+        function countClick() { 
+            jQuery.get('/count-click');      
+        }
+    </script>
 @endsection
-
-<style>
-    .job_details_title {
-        font-weight:bold;
-        color:blue;
-    }
-
-    .job_details_title p {
-        color:red;
-        text-transform: uppercase;
-        margin-bottom:10px;
-        font-size:20px;
-    }
-
-    ul {
-        list-style: none;
-    }
-
-    .additional_info {
-        color:#333;
-        font-size:15px;
-    }
-
-    .list-group-item {
-        padding:0 !important;
-    }
-
-</style>

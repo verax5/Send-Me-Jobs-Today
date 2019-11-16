@@ -20,7 +20,7 @@ class SearchJobs
 
     public $blogpostKeyword;
     public $blogpostLocation;
-
+    
     public function __construct(Client $guzzle)
     {
         $this->guzzle = $guzzle;
@@ -45,7 +45,7 @@ class SearchJobs
         $this->previousPage = ($this->currentPage - 1) <= 0 ? 1 : $this->currentPage - 1;
     }
 
-    public function search($page = null)
+    public function search($page = null, $limit=50)
     {
         $uniqueId = '';
 
@@ -74,7 +74,7 @@ class SearchJobs
             'user_agent' => request()->server('HTTP_USER_AGENT'),
             'user_ip' => $userIp,
             // Give me any job even without salary 'salary_from' => 1,
-            'limit' => 50,
+            'limit' => $limit,
             'radius' => 20,
         ];
 
@@ -86,11 +86,6 @@ class SearchJobs
         return json_decode($request->getBody()->getContents());
     }
 
-    public function getJobDetails()
-    {
-        $this->jobDetailsSearch = true;
-    }
-
     public function getNextPage()
     {
         return $this->nextPage;
@@ -99,5 +94,10 @@ class SearchJobs
     public function getPreviousPage()
     {
         return $this->previousPage;
+    }
+
+    public function getJobDetails($title = null)
+    {
+        return view('job_details', ['jobDetails'=>$this->search(null, 1)]);
     }
 }
