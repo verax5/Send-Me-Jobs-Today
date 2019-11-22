@@ -14,7 +14,7 @@
     		 <p>{!! $jobDetails->snippet !!}</p>
     		<br>
     		<div class="text-center">
-       			<a onclick="countClick();" target="_blank" class="job_titles" href="{{ $jobDetails->url }}" onmousedown="{{ $jobDetails->onmousedown }}"><button style="padding-left:50px; padding-right:50px; background-color:#dd5800; font-size:20px; text-decoration: underline;" class="btn btn-info">Read Description..</button></a>
+       			<a onclick="countClick(); pixelClick();" target="_blank" class="job_titles" href="{{ $jobDetails->url }}" onmousedown="{{ $jobDetails->onmousedown }}"><button style="padding-left:50px; padding-right:50px; background-color:#dd5800; font-size:20px; text-decoration: underline;" class="btn btn-info">Read Description..</button></a>
        		</div>
     	</div>
 
@@ -25,5 +25,9 @@
         function countClick() { 
             jQuery.get('/count-click');      
         }
+
+		function pixelClick() {
+			fbq('track', 'purchase');
+		};
     </script>
 @endsection
