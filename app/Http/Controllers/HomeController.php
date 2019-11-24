@@ -59,7 +59,7 @@ class HomeController extends Controller {
 
     public function getJobDetails()
     {
-        return view('job_details', ['jobDetails' => $this->searchJobs->search(null, 1)->data[0]]);
+        return view('job_details', ['jobDetails' => $this->searchJobs->search(null, 5)->data]);
     }
 
 }
