@@ -6,6 +6,8 @@
         <link rel="stylesheet" type="text/css" href="/css/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+        <script data-ad-client="ca-pub-4947569401603583" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
         <!-- Global site tag (gtag.js) - Google Analytics -->
       <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110222642-4"></script>
       <script>

@@ -14,7 +14,7 @@
 			<div class="col-md-12">
 				{{ $job->title}} {{ $job->salary}}
 				<div class="">
-		   			<a onclick="countClick();" target="_blank" class="job_titles" href="{{ $job->url }}" onmousedown="{{ $job->onmousedown }}"><button style="padding-left:50px; padding-right:50px; background-color:#dd5800; font-size:20px; text-decoration: underline;" class="btn btn-info">Read Description..</button></a>
+		   			<a onclick="countClick(); fbq('track', 'Purchase');" target="_blank" class="job_titles" href="{{ $job->url }}" onmousedown="{{ $job->onmousedown }}"><button style="padding-left:50px; padding-right:50px; background-color:#dd5800; font-size:20px; text-decoration: underline;" class="btn btn-info">Read Description..</button></a>
 		   		</div>
 			</div>	
 		</div> <hr>
