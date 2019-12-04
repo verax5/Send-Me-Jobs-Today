@@ -10,7 +10,7 @@ class SearchJobs
     private $location;
     private $category;
     private $api = 'https://adview.online/api/v1/jobs.json';
-    private $publisher = 1145;
+    private $publisher = 2574;
     private $mode = 'basic';
 
     private $currentPage;
