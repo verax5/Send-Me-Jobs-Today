@@ -65,3 +65,16 @@ Route::get('job-apply', 'HomeController@getJobDetails');
 //Route::post('download-feed/{company_id}', 'CompanyController@downloadFeed')->name('download.feed');
 
 // Route::get('track-open/{user_id}', 'RedirectUserController@trackOpens');
+
+Route::get('report', function(){
+	$report = \DB::table('track')->orderBy('id', 'desc')->get();
+
+	echo "<table>";
+		foreach($report as $r) {
+			echo '<tr>';
+				echo '<td>'. $r->date . '</td>';
+				echo '<td>'. $r->count .'</td>';
+			echo '</tr>';
+		}
+	echo "</table>";
+});
