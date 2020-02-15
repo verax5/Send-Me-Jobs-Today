@@ -11,7 +11,7 @@ class SearchJobs
     private $category;
     private $api = 'https://adview.online/api/v1/jobs.json';
     private $publisher = 2574;
-    private $mode = 'basic';
+    private $mode = 'advanced';
 
     private $currentPage;
     private $nextPage;
@@ -65,6 +65,15 @@ class SearchJobs
             $userIp = $_SERVER['HTTP_CF_CONNECTING_IP'];
         }
 
+        if($this->mode == 'advanced') {
+            $this->keyword =  '@(title) ' . $this->keyword;
+        }
+
+        $snippet = 'basic';
+        if(request()->route()->uri == 'job-apply') {
+            $snippet = 'full';
+        }
+
         $query = [
             'publisher' => $this->publisher,
             'page' => $this->currentPage,
@@ -76,7 +85,10 @@ class SearchJobs
             // Give me any job even without salary 'salary_from' => 1,
             'limit' => $limit,
             'radius' => 20,
+            'mode' => $this->mode,
+            'snippet' => $snippet
         ];
+
 
         $request = $this->guzzle->request('GET', $this->api, [
             'query' => http_build_query($query),

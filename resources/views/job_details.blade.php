@@ -9,13 +9,21 @@
 			<b><a style="text-decoration: underline; color:#3800ff;" href="/search?keyword={{request()->get('keyword')}}&location={{request()->get('location')}}">More jobs? <i>SEE HERE</i></a></b>
 		</div>
 	</div>
-
+<br>
 	@foreach($jobDetails as $job)
 	    <div class="row mb-4 text-center">
 			<div class="col-md-12">
-				{{ $job->title}} {{ $job->salary}}
+				{{-- <b>{{ $job->title}}</b> --}}
+				<p>{!! $job->snippet !!}</p>
 				<div class="">
-		   			<a onclick="countClick(); fbq('track', 'Purchase');" target="_blank" class="job_titles" href="{{ $job->url }}" onmousedown="{{ $job->onmousedown }}"><button style="padding-left:50px; padding-right:50px; background-color:#dd5800; font-size:20px; text-decoration: underline;" class="btn btn-info">Read Description..</button></a>
+					<a onclick="countClick(); fbq('track', 'Purchase');" 
+						target="_blank" class="job_titles" href="{{ $job->url }}" 
+						onmousedown="{{ $job->onmousedown }}">
+					
+						<button style="margin:10px; padding-left:50px; padding-right:50px; background-color:#0037dd; font-size:20px; text-decoration: underline;" 
+							class="btn btn-info">APPLY
+						</button>
+					</a>
 		   		</div>
 			</div>	
 		</div>
